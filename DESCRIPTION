@@ -1,0 +1,10 @@
+Package: elan
+Title: Read ELAN XML files
+Version: 0.1
+Authors@R: "Dale Barr <dalejbarr3@gmail.com> [aut, cre]"
+Description: Read ELAN XML files to tidy output
+Depends:
+    R (>= 3.1.1),
+    dplyr
+License: 
+LazyData: true
