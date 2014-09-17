@@ -23,7 +23,7 @@ Warning: Much beta.
   library(elan)
 
   # parse the xml tree
-  doc <- elanTree("DJI240211AC2.eaf")
+  doc <- elanTree("DJI240211AC2.eaf") # name of your .eaf file goes here
 
   # list of all the tiers and their attributes
   tiers <- readTierList(doc)
