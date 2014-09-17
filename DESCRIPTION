@@ -6,5 +6,8 @@ Description: Read ELAN XML files to tidy output
 Depends:
     R (>= 3.1.1),
     dplyr
+Imports:
+	  XML,
+    plyr
 License: 
 LazyData: true
