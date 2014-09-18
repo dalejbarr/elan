@@ -2,7 +2,7 @@ R functions for pulling in data from .eaf files created with [ELAN](https://tla.
 
 ```R
 library(devtools)
-install_github("dalebarr/elan")
+install_github("dalejbarr/elan")
 ```
 
 Best experienced with [dplyr](https://github.com/hadley/dplyr).
@@ -18,8 +18,7 @@ Warning: Much beta.
   #       and the elan package from github
   # so uncomment the two lines below to get started
   # install.packages("devtools")
-  # install_github("dalejbarr/elan")
-
+  
   library(elan)
 
   # parse the xml tree
