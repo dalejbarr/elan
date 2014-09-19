@@ -14,11 +14,6 @@ Warning: Much beta.
 ### Reading in the tiers and annotations
 
 ```R
-  # TODO: you need to have devtools
-  #       and the elan package from github
-  # so uncomment the two lines below to get started
-  # install.packages("devtools")
-  
   library(elan)
 
   # parse the xml tree
