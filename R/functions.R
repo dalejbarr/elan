@@ -4,6 +4,9 @@
 #' @importFrom XML xmlInternalTreeParse
 #' @export
 elanTree <- function(fname) {
+    if (!file.exists(fname)) {
+        stop("file '", fname, "' does not exist; check working directory")
+    } else {}
     XML::xmlInternalTreeParse(fname)
 }
 
@@ -19,6 +22,7 @@ processTimeSlot <- function(node) {
 #' @param doc parsed XML tree (see \code{\link{elanTree}})
 #' @return data frame with timeslot IDs and values
 #' @importFrom XML getNodeSet
+#' @importFrom plyr ldply
 #' @export
 readTimeSlots <- function(doc) {
     nodelist <- XML::getNodeSet(doc, "//TIME_SLOT")
@@ -159,4 +163,39 @@ readTierList <- function(doc, inheritMissingAttrs=TRUE) {
     } else {}
     options(stringsAsFactors=oldOpts)
     return(res)
+}
+
+#' Read in the annotations from a multiple files
+#'
+#' Read in annotations from multiple ELAN files
+#' @param fileName vector of filenames
+#' @return a data frame
+#' @importFrom plyr ldply
+#' @export
+efileAnnotations <- function(fileName) {
+    ldply(fileName, function(x) {
+               doc <- elanTree(x)
+               align_ann <- readAnnotations(doc) %>%
+                   mutate(filename = x, atype = "ANN")
+               align_ref <- readAnnotations(doc, "REF") %>%
+                   mutate(filename = x, atype = "REF")
+               bind_rows(align_ann, align_ref)
+           })
+}
+
+#' List all tiers in elan file(s)
+#'
+#' List all annotation tiers in single or multiple ELAN files
+#' @param fileName vector of filenames
+#' @param inheritMissingAttr inherit missing attributes from parent tier (default=\code{TRUE})
+#' @importFrom plyr ldply
+#' @return a data frame
+#' @seealso \code{\link{readTierList}}
+#' @export
+efileTierList <- function(fileName, inheritMissingAttr = TRUE) {
+    ldply(fileName, function(x) {
+               doc <- elanTree(x)
+               tiers <- readTierList(doc, inheritMissingAttr) %>%
+                   mutate(filename = x)
+           })
 }
