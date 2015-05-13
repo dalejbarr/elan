@@ -11,7 +11,16 @@ Warning: Much beta.
 
 ## Some examples
 
-### Reading in the tiers and annotations
+### Reading in the tiers and annotations (single/multiple files)
+
+```R
+  library(elan)
+
+  all_ann <- efileAnnotations(c("file1.eaf", "file2.eaf"))
+  all_tiers <- efileTierList(c("file1.eaf", "file2.eaf"))
+```
+
+### Reading in the tiers and annotations (single files)
 
 ```R
   library(elan)
